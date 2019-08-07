@@ -9,6 +9,12 @@ class WeatherScreen extends StatefulWidget {
 }
 
 class _WeatherScreenState extends State<WeatherScreen> {
+  int selectedIndex = 3;
+
+  _onSelected(int index) {
+    //setState(() => _selectedIndex = index);
+    print(index);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -113,21 +119,26 @@ class _WeatherScreenState extends State<WeatherScreen> {
               ),
             ),
             Expanded(
-              flex: 2,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  HourWeatherCard(),
-                  HourWeatherCard(),
-                  HourWeatherCard(),
-                  HourWeatherCard(),
 
-                ],
+              flex: 2,
+              child: Container(
+                margin: EdgeInsets.only(left: 20),
+                child: ListView.separated(
+                  padding: EdgeInsets.all(10),
+                  itemBuilder: (BuildContext context,int index){
+                    return HourWeatherCard(selectedIndex == index,(){setState(() {
+                      selectedIndex = index;
+                      print(index);
+                    });});
+                  },
+                  itemCount: 6,
+                  separatorBuilder: (BuildContext context, int index) => SizedBox(width: 12,),
+                  scrollDirection: Axis.horizontal,
+                ),
               ),
             ),
             Expanded(
-              child: Row(
-              ),
+              child: Row(),
             ),
 
           ],

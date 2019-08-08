@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 
 import 'constraints.dart';
-import 'hour_weather_card.dart';
+import 'date_change_button.dart';
+import 'hour_weather_list_view.dart';
 
-class WeatherScreen extends StatefulWidget {
-  @override
-  _WeatherScreenState createState() => _WeatherScreenState();
-}
-
-class _WeatherScreenState extends State<WeatherScreen> {
-  int selectedIndex = 3;
-
-  _onSelected(int index) {
-    //setState(() => _selectedIndex = index);
-    print(index);
+// ignore: must_be_immutable
+class WeatherScreen extends StatelessWidget {
+  int selectedIndex = -1;
+  onSelected(int index) {
+    if(selectedIndex == index){
+      selectedIndex = -1;
+    }else {
+      selectedIndex = index;
+    }
   }
   @override
   Widget build(BuildContext context) {
@@ -29,8 +28,8 @@ class _WeatherScreenState extends State<WeatherScreen> {
                   Text(
                     'Weather Forecast',
                     style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20
+                        color: Colors.white,
+                        fontSize: 20
                     ),
                   )
                 ],
@@ -73,12 +72,12 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 children: <Widget>[
                   SizedBox(width: 30,),
                   Text(
-                    '28',
-                    style: TextStyle(
-                      fontSize: 150,
-                      fontWeight: FontWeight.w300,
-                      color: Colors.white
-                    )
+                      '28',
+                      style: TextStyle(
+                          fontSize: 150,
+                          fontWeight: FontWeight.w300,
+                          color: Colors.white
+                      )
                   ),
                   Column(
                     children: <Widget>[
@@ -86,7 +85,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                         height: 34,
                       ),
                       Text(
-                          '°C',
+                        '°C',
                         style: kBasicText.copyWith(fontSize: 40),
 
                       ),
@@ -112,9 +111,9 @@ class _WeatherScreenState extends State<WeatherScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  DateButton('Today',null),
-                  DateButton('Tomorrow',null),
-                  DateButton('Next 7 Days >',null),
+                  DateChangeButton('Today',(){}),
+                  DateChangeButton('Tomorrow',(){}),
+                  DateChangeButton('Next 7 Days >',(){}),
                 ],
               ),
             ),
@@ -123,44 +122,15 @@ class _WeatherScreenState extends State<WeatherScreen> {
               flex: 2,
               child: Container(
                 margin: EdgeInsets.only(left: 20),
-                child: ListView.separated(
-                  padding: EdgeInsets.all(10),
-                  itemBuilder: (BuildContext context,int index){
-                    return HourWeatherCard(selectedIndex == index,(){setState(() {
-                      selectedIndex = index;
-                      print(index);
-                    });});
-                  },
-                  itemCount: 6,
-                  separatorBuilder: (BuildContext context, int index) => SizedBox(width: 12,),
-                  scrollDirection: Axis.horizontal,
-                ),
+                child: HourWeatherListView(),
               ),
             ),
             Expanded(
               child: Row(),
             ),
-
           ],
         ),
       ),
-    );
-  }
-}
-
-// ignore: must_be_immutable
-class DateButton extends StatelessWidget {
-  String text;
-  Function action;
-
-  DateButton(this.text, this.action);
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      fillColor: Color(0xFF10103B),
-      onPressed: action,
-      child: Text(text,style: kBasicText,),
-      elevation: 0,
     );
   }
 }

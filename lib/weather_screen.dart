@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'constraints.dart';
 import 'date_change_button.dart';
+import 'hour_rain_list_view.dart';
 import 'hour_weather_list_view.dart';
 
 // ignore: must_be_immutable
@@ -75,7 +76,7 @@ class WeatherScreen extends StatelessWidget {
                       '28',
                       style: TextStyle(
                           fontSize: 150,
-                          fontWeight: FontWeight.w300,
+                          fontWeight: FontWeight.w200,
                           color: Colors.white
                       )
                   ),
@@ -119,14 +120,64 @@ class WeatherScreen extends StatelessWidget {
             ),
             Expanded(
 
-              flex: 2,
+              flex: 3,
               child: Container(
                 margin: EdgeInsets.only(left: 20),
                 child: HourWeatherListView(),
               ),
             ),
             Expanded(
-              child: Row(),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  SizedBox(
+                    width: 20,
+                    height: 50,
+                  ),
+                  Text(
+                    'Chance of Rain',
+                    style: kHourRainTextStyle.copyWith(fontSize: 20),
+                  ),
+                ],
+              ),
+            ),
+            //TODO optimize to different screen sizes
+            //TODO connect listViews
+            //TODO polish UI
+            //TODO create second screen
+            //TODO create different themes based on weather
+            //TODO create actual api integration
+            Expanded(
+              flex: 3,
+              child: Row(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20,bottom: 40),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          'heavy\nrain',
+                          style: kHourRainTextStyle,
+                          textAlign: TextAlign.left,
+                        ),
+                        Text(
+                          'rainy',
+                          style: kHourRainTextStyle,
+                          textAlign: TextAlign.left,
+                        ),
+                        Text(
+                          'sunny',
+                          style: kHourRainTextStyle,
+                          textAlign: TextAlign.left,
+                        ),
+
+                      ],
+                    ),
+                  ),
+                  Expanded(child: HourRainListView()),
+                ],
+              ),
             ),
           ],
         ),

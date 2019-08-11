@@ -17,165 +17,199 @@ class WeatherScreen extends StatelessWidget {
   }
   @override
   Widget build(BuildContext context) {
+    var media  = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: <Widget>[
             Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
+              flex: 10,
+              child: Column(
                 children: <Widget>[
-                  Text(
-                    'Weather Forecast',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Icon(
-                    Icons.cloud,
-                    color: Colors.white,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        'Today',
-                        style: kBasicText.copyWith(fontSize: 30),
-                      ),
-                      Text(
-                        'Sat, 3 Aug',
-                        style: kBasicText,
-                      )
-                    ],
-                  ),
-                  SizedBox(width: 30,)
-                ],
-              ),
-            ),
-            Expanded(
-              flex: 2,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  SizedBox(width: 30,),
-                  Text(
-                      '28',
-                      style: TextStyle(
-                          fontSize: 150,
-                          fontWeight: FontWeight.w200,
-                          color: Colors.white
-                      )
-                  ),
-                  Column(
-                    children: <Widget>[
-                      SizedBox(
-                        height: 34,
-                      ),
-                      Text(
-                        '°C',
-                        style: kBasicText.copyWith(fontSize: 40),
-
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text('Barcelona, Spain',style: kBasicText.copyWith(fontSize: 15),),
-              ],
-            ),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text('Feels like 32   *   Sunset 20:15',style: kBasicText.copyWith(fontSize: 15),),
-              ],
-            ),
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  DateChangeButton('Today',(){}),
-                  DateChangeButton('Tomorrow',(){}),
-                  DateChangeButton('Next 7 Days >',(){}),
-                ],
-              ),
-            ),
-            Expanded(
-
-              flex: 3,
-              child: Container(
-                margin: EdgeInsets.only(left: 20),
-                child: HourWeatherListView(),
-              ),
-            ),
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  SizedBox(
-                    width: 20,
-                    height: 50,
-                  ),
-                  Text(
-                    'Chance of Rain',
-                    style: kHourRainTextStyle.copyWith(fontSize: 20),
-                  ),
-                ],
-              ),
-            ),
-            //TODO optimize to different screen sizes
-            //TODO connect listViews
-            //TODO polish UI
-            //TODO create second screen
-            //TODO create different themes based on weather
-            //TODO create actual api integration
-            Expanded(
-              flex: 3,
-              child: Row(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20,bottom: 40),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          'heavy\nrain',
-                          style: kHourRainTextStyle,
-                          textAlign: TextAlign.left,
-                        ),
-                        Text(
-                          'rainy',
-                          style: kHourRainTextStyle,
-                          textAlign: TextAlign.left,
-                        ),
-                        Text(
-                          'sunny',
-                          style: kHourRainTextStyle,
-                          textAlign: TextAlign.left,
-                        ),
-
+                          'Weather Forecast',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: media.width/22
+                          ),
+                        )
                       ],
                     ),
                   ),
-                  Expanded(child: HourRainListView()),
+                  Expanded(
+                    flex: 2,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(
+                          Icons.cloud,
+                          color: Colors.white,
+                          size: media.width/15,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              'Today',
+                              style: kBasicText.copyWith(fontSize: media.width/17),
+                            ),
+                            Text(
+                              'Sat, 3 Aug',
+                              style: kBasicText.copyWith(fontSize: media.width/35),
+                            )
+                          ],
+                        ),
+                        SizedBox(width: media.width/23,)
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    flex: 3,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(width: media.width/20,),
+                        Text(
+                            '28',
+                            style: TextStyle(
+                                fontSize: media.width/5,
+                                fontWeight: FontWeight.w200,
+                                color: Colors.white
+                            )
+                        ),
+                        Column(
+                          children: <Widget>[
+                            SizedBox(
+                              height: media.width/20,
+                            ),
+                            Text(
+                              '°C',
+                              style: kBasicText.copyWith(fontSize: media.width/15),
+
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  Flexible(
+                    flex: 2,
+                    child: Column(
+                      children: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text('Barcelona, Spain',style: kBasicText.copyWith(fontSize: media.width/33),),
+                          ],
+                        ),
+                        SizedBox(height: media.width/30,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text('Feels like 32   *   Sunset 20:15',style: kBasicText.copyWith(fontSize:  media.width/33),),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+
+
+                  Expanded(
+                    flex: 2,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        DateChangeButton('Today',(){}),
+                        DateChangeButton('Tomorrow',(){}),
+                        DateChangeButton('Next 7 Days >',(){}),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            Expanded(
+              flex: 12,
+              child: Column(
+                children: <Widget>[
+                  Flexible(
+                    flex: 6,
+                    child: Row(
+                      children: <Widget>[
+                        SizedBox(width: media.width/30),
+                        Flexible(child: HourWeatherListView()),
+                      ],
+                    ),
+                  ),
+                  Flexible(
+                    flex: 3,
+                    child: Column(
+                      children: <Widget>[
+                        SizedBox(height: media.width/15,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            SizedBox(width: media.width/30,),
+                            Text(
+                              'Chance of Rain',
+                              style: kHourRainTextStyle.copyWith(fontSize: media.width/26),
+                            ),
+                            SizedBox(height: media.width/30,),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  //TODO connect listViews
+                  //TODO polish UIh
+                  //TODO create second screen
+                  //TODO create different themes based on weather
+                  //TODO create actual api integration
+                  Expanded(
+                    flex: 6,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(width: media.width/30,),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text(
+                              'heavy\nrain',
+                              style: kHourRainTextStyle.copyWith(fontSize: media.width/35),
+                              textAlign: TextAlign.left,
+                            ),
+                            Text(
+                              'rainy',
+                              style: kHourRainTextStyle.copyWith(fontSize: media.width/35),
+                              textAlign: TextAlign.left,
+                            ),
+                            Text(
+                              'sunny',
+                              style: kHourRainTextStyle.copyWith(fontSize: media.width/35),
+                              textAlign: TextAlign.left,
+                            ),
+                            SizedBox(height: media.width/60,)
+                          ],
+                        ),
+                        Flexible(
+                            child: HourRainListView()
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),

@@ -15,16 +15,15 @@ class _HourWeatherCardState extends State<HourWeatherCard> with SingleTickerProv
 
   @override
   Widget build(BuildContext context) {
-
+    var media  = MediaQuery.of(context).size;
     double padValueTop = widget.isSelected? 0:20;
     double padValueBottom = widget.isSelected? 20:0;
     return AnimatedContainer(
       curve: Curves.decelerate,
       duration: Duration(milliseconds: 200),
       padding: EdgeInsets.only(bottom: padValueBottom,top: padValueTop),
-      width: 100,
-      height: 230,
       child: HourWeatherButton(widget.isSelected,widget.action),
+      constraints: BoxConstraints.tightFor(width: media.width/5.3,height: media.width/6),
     );
   }
 }
